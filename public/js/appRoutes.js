@@ -7,15 +7,16 @@
     var homeSettings = {
       url: '/home',
       templateUrl: "views/home.html",
-      controller: "FoodCtrl"
-    }
+      controller: "FoodCtrl",
+      controllerAs: "vm"
+    };
 
     var searchSettings = {
       url: '/search',
       templateUrl: "views/search.html",
       controller: "SearchCtrl",
-      controllerAs: "vm",
-    }
+      controllerAs: "vm"
+    };
 
     $stateProvider
       .state('home', homeSettings)

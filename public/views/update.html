@@ -1,34 +1,43 @@
-<div class="row">
-  <div class="col-lg-offset-2 col-lg-8">
-    <div class="jumbotron">
-      <form name="foodForm" ng-submit="submitFood()">
-        <div class="row">
-          <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': foodForm.foodName.$touched && foodForm.foodName.$invalid }">
-            <label for="foodName">Food</label>
-            <input type="text" name="foodName" class="form-control" id="foodName" placeholder="Food Name" ng-model="food.name" required>
-          </div><br/>
-        </div>
-        <div class="row">
-          <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': foodForm.foodDesc.$touched && foodForm.foodDesc.$invalid }">
-            <label for="foodDescription">Description</label>
-            <input type="text" name="foodDesc" class="form-control" id="foodDescription" placeholder="Describe the food" ng-model="food.description" required>
-          </div><br/>
-        </div>
-        <div class="row">
-          <div class="col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': foodForm.foodCat.$touched &&  foodForm.foodCat.$invalid }">
-            <label for="foodCategory">Category</label>
-            <select name="foodCat" class="form-control" id="foodCategory" ng-model="food.category" required>
-              <option ng-repeat="category in categories" ng-value="category">{{category}}</option>
-            </select>
-          </div><br/>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-offset-3 col-lg-6">
-            <button type="submit" class="btn btn-default">Submit</button>
+<div class="modal fade" id="editFoodModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit {{originalFoodName}}</h4>
+      </div>
+      <div class="modal-body">
+        <form class="" name="editFoodForm" method="post">
+          <div class="row">
+            <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': editFoodForm.editFoodName.$touched && editFoodForm.editFoodName.$invalid }">
+              <label for="editFoodName">Food</label>
+              <input type="text" name="editFoodName" class="form-control" id="editFoodName" placeholder="Food Name" ng-model="vm.modalFood.name" required>
+            </div><br/>
           </div>
-        </div>
-      </form>
+          <div class="row">
+            <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': editFoodForm.editFoodDesc.$touched && editFoodForm.editFoodDesc.$invalid }">
+              <label for="editFoodDescription">Description</label>
+              <input type="text" name="editFoodDesc" class="form-control" id="editFoodDescription" placeholder="Describe the food" ng-model="vm.modalFood.description" required>
+            </div><br/>
+          </div>
+          <div class="row">
+            <div class="col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': editFoodForm.editFoodCat.$touched &&  editFoodForm.editFoodCat.$invalid }">
+              <label for="editFoodCategory">Category</label>
+              <select name="editFoodCat" class="form-control" id="foodCategory" ng-model="vm.modalFood.category" required>
+                <option ng-repeat="category in vm.categories" ng-value="category">{{category}}</option>
+              </select>
+            </div><br/>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-offset-3 col-lg-6">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" ng-disabled="editFoodForm.$invalid" ng-click="vm.updateFood(vm.modalFood)">Submit</button>
+      </div>
     </div>
   </div>
 </div>

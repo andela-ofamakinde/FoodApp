@@ -1,8 +1,9 @@
 (function(){
   angular
   .module("FoodApp.controllers")
-  .controller("HeaderCtrl", ["$scope", "$location", function($scope, $location) {
-    $scope.getClass = function(path) {
+  .controller("HeaderCtrl", ["$location", function($location) {
+    var vm = this;
+    vm.getClass = function(path) {
       return ($location.path() === path) ? 'active' : '';
     }
   }]);

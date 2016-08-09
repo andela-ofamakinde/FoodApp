@@ -1,24 +1,24 @@
 <div class="row">
   <div class="col-lg-offset-2 col-lg-8">
     <div class="jumbotron">
-      <form name="foodForm" ng-submit="submitFood()">
+      <form name="foodForm" ng-submit="vm.submitFood()">
         <div class="row">
           <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': foodForm.foodName.$touched && foodForm.foodName.$invalid }">
             <label for="foodName">Food</label>
-            <input type="text" name="foodName" class="form-control" id="foodName" placeholder="Food Name" ng-model="food.name" required>
+            <input type="text" name="foodName" class="form-control" id="foodName" placeholder="Food Name" ng-model="vm.food.name" required>
           </div><br/>
         </div>
         <div class="row">
           <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': foodForm.foodDesc.$touched && foodForm.foodDesc.$invalid }">
             <label for="foodDescription">Description</label>
-            <input type="text" name="foodDesc" class="form-control" id="foodDescription" placeholder="Describe the food" ng-model="food.description" required>
+            <input type="text" name="foodDesc" class="form-control" id="foodDescription" placeholder="Describe the food" ng-model="vm.food.description" required>
           </div><br/>
         </div>
         <div class="row">
           <div class="col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': foodForm.foodCat.$touched &&  foodForm.foodCat.$invalid }">
             <label for="foodCategory">Category</label>
-            <select name="foodCat" class="form-control" id="foodCategory" ng-model="food.category" required>
-              <option ng-repeat="category in categories" ng-value="category">{{category}}</option>
+            <select name="foodCat" class="form-control" id="foodCategory" ng-model="vm.food.category" required>
+              <option ng-repeat="category in vm.categories" ng-value="category">{{category}}</option>
             </select>
           </div><br/>
         </div>
@@ -36,10 +36,10 @@
   <div class="col-lg-offset-2 col-lg-8">
     <div class="jumbotron padded">
     <div ng-include="'partials/filterWidget.html'"></div>
-    <div ng-hide="tempDB.length">
+    <div ng-hide="vm.tempDB.length">
       <h2>Food list empty</h2>
     </div>
-    <div ng-show="tempDB.length">
+    <div ng-show="vm.tempDB.length">
       <h2>Food Listing</h2>
       <table class="table table-striped">
         <thead>
@@ -52,14 +52,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="food in tempDB | filter:keyword">
+          <tr ng-repeat="food in vm.tempDB | filter:vm.keyword">
             <td>{{$index + 1}}</td>
             <td>{{food.name}}</td>
             <td>{{food.description}}</td>
             <td>{{food.category}}</td>
             <td>{{food.timestamp | date: "dd.MM.y - hh: mm: a"}}</td>
-            <td><span class="glyphicon glyphicon-trash" ng-click="deleteFood(food, $index)"></span></td>
-            <td><span class="glyphicon glyphicon-pencil" ng-click="editItem(food)"></span></td>
+            <td><span class="glyphicon glyphicon-trash" ng-click="vm.deleteFood(food, $index)"></span></td>
+            <td><span class="glyphicon glyphicon-pencil" ng-click="vm.editItem(food)"></span></td>
           </tr>
         </tbody>
       </table>
@@ -68,46 +68,4 @@
   </div>
 </div>
 
-<div class="modal fade" id="editFoodModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit {{originalFoodName}}</h4>
-      </div>
-      <div class="modal-body">
-        <form class="" name="editFoodForm" method="post">
-          <div class="row">
-            <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': editFoodForm.editFoodName.$touched && editFoodForm.editFoodName.$invalid }">
-              <label for="editFoodName">Food</label>
-              <input type="text" name="editFoodName" class="form-control" id="editFoodName" placeholder="Food Name" ng-model="modalFood.name" required>
-            </div><br/>
-          </div>
-          <div class="row">
-            <div class="form-group col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': editFoodForm.editFoodDesc.$touched && editFoodForm.editFoodDesc.$invalid }">
-              <label for="editFoodDescription">Description</label>
-              <input type="text" name="editFoodDesc" class="form-control" id="editFoodDescription" placeholder="Describe the food" ng-model="modalFood.description" required>
-            </div><br/>
-          </div>
-          <div class="row">
-            <div class="col-lg-offset-3 col-lg-6" ng-class="{ 'has-error': editFoodForm.editFoodCat.$touched &&  editFoodForm.editFoodCat.$invalid }">
-              <label for="editFoodCategory">Category</label>
-              <select name="editFoodCat" class="form-control" id="foodCategory" ng-model="modalFood.category" required>
-                <option ng-repeat="category in categories" ng-value="category">{{category}}</option>
-              </select>
-            </div><br/>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" ng-disabled="editFoodForm.$invalid" ng-click="updateFood(modalFood)" data-dismiss="modal">Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div ng-include="'views/update.html'"></div>
