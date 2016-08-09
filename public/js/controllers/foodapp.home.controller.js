@@ -2,9 +2,6 @@
   angular
   .module("FoodApp.controllers")
   .controller("FoodCtrl", ["$scope", "$location", "Foods", function($scope, $location, Foods) {
-    $scope.getClass = function(path) {
-      return ($location.path() === path) ? 'active' : '';
-    }
 
     $scope.keyword;
     $scope.order;
@@ -18,17 +15,16 @@
         $scope.tempDB = res.data;
         $scope.sortByDate("newest");
       }, function(err) {
-        console.log("food error", err);
+        alert("Error when Retrieving food.");
       });
     }
 
     $scope.submitFood = function () {
       Foods.addFood($scope.food).then(function(res) {
-        console.log("Added successfully");
         $scope.food = {};
         updateFoodTable();
       }, function(err){
-        console.log("add food error", err);
+        alert("Error when Adding food.");
       });
     };
 
@@ -46,22 +42,27 @@
     };
 
     $scope.deleteFood = function(food, index){
-      console.log("food to be deleted", food, index);
       Foods.deleteFood(food._id).then(function(res) {
         updateFoodTable();
       }), function(err){
-        console.log("delete food error", err);
+        alert("Error when Deleting food.");
       }
     }
 
-    // $scope.updateFood = function(food, index){
-    //   console.log("food to be deleted", food, index);
-    //   Foods.updateFood(food._id).then(function(res) {
-    //     updateFoodTable();
-    //   }), function(err){
-    //     console.log("delete food error", err);
-    //   }
-    // }
+    $scope.editItem = function(food) {
+      $('#editFoodModal').modal('show');
+      $scope.modalFood = $.extend({}, food);
+      $scope.originalFoodName = food.name;
+    }
+
+    $scope.updateFood = function(newFood){
+      Foods.updateFood(newFood._id, newFood).then(function(res) {
+        $('#editFoodModal').modal('hide');
+        updateFoodTable();
+      }), function(err){
+        alert("Error when Updating food.");
+      }
+    }
 
   }])
 })()
