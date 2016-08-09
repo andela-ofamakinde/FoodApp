@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Food App</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body ng-app="FoodApp">
+    <div ng-include="'shared/header.html'"></div>
+    <div ui-view></div>
+
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="js/controllers/mainController.js"></script>
+    <script type="text/javascript" src="js/controllers/foodapp.home.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/foodapp.header.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/foodapp.search.controller.js"></script>
+    <script type="text/javascript" src="js/services/mainFactory.js"></script>
+    <script type="text/javascript" src="js/appRoutes.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>

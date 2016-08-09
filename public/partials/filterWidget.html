@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-6">
+      <div>
+         <select class="form-control" id="foodCategory" ng-model="cat" ng-change="filterBy(cat)">
+           <option value="" disabled selected>Search By Category</option>
+            <option ng-repeat="category in categories" ng-value="category">{{category}}</option>
+            <option ng-value="''">Show All</option>
+          </select>
+      </div>
+  </div>
+  <div class="col-lg-6">
+      <form ng-submit="filterBy(searchTerm)">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search by keyword" ng-model="searchTerm">
+            <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </form>
+  </div>
+</div>
+<div class="row leftPadding">
+  <div class="radio">
+    <label><input type="radio" name="optradio" ng-model="order" ng-value="oldest" ng-click="sortByDate('oldest')">Sort by Oldest</label>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <label><input type="radio" name="optradio" ng-model="order" ng-value="newest" ng-click="sortByDate('newest')" checked="checked"> Sort by Newest</label>
+  </div>
+</div>

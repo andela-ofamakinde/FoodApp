@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-lg-offset-2 col-lg-8">
+    <div class="jumbotron padded">
+    <div ng-include="'partials/searchWidget.html'"></div>
+    <div ng-show="!vm.searchResult.length && vm.searchCompleted">
+      <h2>Search retured no result</h2>
+    </div>
+    <div ng-show="vm.searchResult.length">
+      <h2>Food Listing</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="food in vm.searchResult">
+            <td>{{food.name}}</td>
+            <td>{{food.description}}</td>
+            <td>{{food.category}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</div>
