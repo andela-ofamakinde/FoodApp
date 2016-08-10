@@ -3,10 +3,10 @@
   .module("FoodApp.controllers")
   .controller("SearchCtrl", ["Foods", function(Foods) {
     var vm = this;
-    vm.searchCompleted = !1;
+    vm.searchCompleted = false;
     vm.searchBy = function(searchterm) {
       Foods.searchFood(searchterm).then(function(res){
-        vm.searchCompleted = !0;
+        vm.searchCompleted = true;
         vm.searchResult = res.data;
       })
     }

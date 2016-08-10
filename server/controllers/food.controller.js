@@ -78,7 +78,6 @@
       if (err) {
         return res.status(500).json(err);
       }
-      console.log("got here", food);
       return res.status(200).send(food);
     })
   }

@@ -1,7 +1,7 @@
 (function(){
   angular
   .module("FoodApp.controllers")
-  .controller("FoodCtrl", ["Foods", function(Foods) {
+  .controller("FoodCtrl", ["Foods", "toastr", function(Foods, toastr) {
     var vm = this;
     vm.keyword;
     vm.order;
@@ -15,7 +15,7 @@
         vm.tempDB = res.data;
         vm.sortByDate("newest");
       }, function(err) {
-        alert("Error when Retrieving food.");
+        toastr.error("Error when Retrieving food.", "Error");
       });
     }
 
@@ -23,8 +23,9 @@
       Foods.addFood(vm.food).then(function(res) {
         vm.food = {};
         updateFoodTable();
+        toastr.info("Food Added", "Success");
       }, function(err){
-        alert("Error when Adding food.");
+        toastr.error("Error when Adding food", "Error");
       });
     };
 
@@ -45,7 +46,7 @@
       Foods.deleteFood(food._id).then(function(res) {
         updateFoodTable();
       }), function(err){
-        alert("Error when Deleting food.");
+        toastr.error("Error when Deleting food.", "Error");
       }
     }
 
@@ -59,10 +60,13 @@
       Foods.updateFood(newFood._id, newFood).then(function(res) {
         $('#editFoodModal').modal('hide');
         updateFoodTable();
+        toastr.info("Food Edited", "Success");
       }), function(err){
-        alert("Error when Updating food.");
+        toastr.error("Error when Updating food.", "Error");
       }
     }
+
+    toastr.clear();
 
   }])
 })()

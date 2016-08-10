@@ -1,3 +1,3 @@
 (function() {
-  angular.module("FoodApp.controllers", []);
+    angular.module("FoodApp.controllers", ["toastr"]);
 })();
